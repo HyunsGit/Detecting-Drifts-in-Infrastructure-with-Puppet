@@ -1,0 +1,21 @@
+---
+# Filebeat 모니터링 설정
+monitoring::filebeat::version: '8.17.10'
+monitoring::filebeat::storage_url: 'https://your-object-storage.example.com/filebeat/8.17.10'
+monitoring::filebeat::config_path: '/etc/filebeat-8.17/system-config'
+monitoring::filebeat::service_name: 'system-filebeat8'
+
+# Node Exporter 모니터링 설정
+monitoring::node_exporter::version: '1.6.0'
+monitoring::node_exporter::download_url: 'https://github.com/prometheus/node_exporter/releases/download'
+monitoring::node_exporter::service_name: 'node_exporter'
+
+# Promtail 모니터링 설정
+monitoring::promtail::version: '2.8.1'
+monitoring::promtail::config_path: '/etc/promtail'
+monitoring::promtail::service_name: 'promtail'
+
+monitoring::node_exporter::uid: 1200
+monitoring::node_exporter::gid: 1200
+monitoring::node_exporter::home_dir: '/home/node_exporter'
+monitoring::node_exporter::force_recreate: true

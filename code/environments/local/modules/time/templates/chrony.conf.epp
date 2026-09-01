@@ -1,0 +1,35 @@
+<%- | String $ntp_server,
+      String $leapsectz = 'right/Asia/Seoul',
+| -%>
+# This file is managed by Puppet. DO NOT EDIT manually!
+# Template: time/chrony.conf.epp
+
+# Primary NTP server (private infra)
+server <%= $ntp_server %> iburst prefer
+
+# Fallback NTP servers (Korean)
+server time.bora.net iburst
+server ntp.kriss.re.kr iburst
+pool kr.pool.ntp.org iburst maxsources 2
+
+# Save timestamps of the clock
+driftfile /var/lib/chrony/drift
+
+# Allow stepping the clock on first sync
+makestep 1.0 3
+
+# Minimum number of selectable sources
+minsources 2
+
+# Enable kernel sync
+rtcsync
+
+# RTC configuration
+rtcfile /var/lib/chrony/rtc
+
+# Leap seconds handling (Korea Standard Time)
+leapsectz <%= $leapsectz %>
+
+# Log directory
+logdir /var/log/chrony
+log measurements statistics tracking

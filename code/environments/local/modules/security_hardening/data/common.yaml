@@ -1,0 +1,103 @@
+---
+security_hardening::managed_users:
+  - scv
+  - probe
+  - drone
+  - marine
+  - zealot
+
+# 사용자 UID 매핑 - QUOTES FIX SYMBOL ISSUE
+security_hardening::user_uid_map:
+  'scv': 300
+  'probe': 301
+  'drone': 302
+  'marine': 303
+  'zealot': 304
+
+# 사용자 GID 매핑 (그룹) - QUOTES REQUIRED
+security_hardening::user_gid_map:
+  'scv': 300
+  'probe': 301
+  'drone': 302
+  'marine': 303
+  'zealot': 304
+
+# 비밀번호 해시 - QUOTES REQUIRED
+security_hardening::user_password_hash:
+  'scv': '$6$REDACTED$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+  'probe': '$6$REDACTED$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+  'drone': '$6$REDACTED$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+  'marine': '$6$REDACTED$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+  'zealot': '$6$REDACTED$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
+# Sudoers 권한 사용자
+security_hardening::sudo_users:
+  - scv
+  - probe
+  - drone
+  - marine
+  - zealot
+  - postgres
+
+# SSH 배너 경로
+security_hardening::ssh_banner_path: '/etc/issue'
+
+# SSH 로그인 배너 내용
+security_hardening::ssh_banner_content: |
+  ----------   ----    ---- ------------ ------------ ------------ ----    ---- --------  ----    ----
+  ************ ****   ****  ************ ************ ************ ****    **** ********  *****   ****
+  --        -- ----  ----   ------------ ----         ---          ----    ----   ----    ------  ----
+  **        ** *********        ****     ************ ***          ************   ****    ************
+  --        -- ---------        ----     ------------ ---          ------------   ----    ------------
+  **        ** ****  ****       ****     ****         ***          ****    ****   ****    ****  ******
+  ------------ ----   ----      ----     ------------ ------------ ----    ---- --------  ----   -----
+
+  ####################################################################################################
+
+                              인가되지 않은 사용자의 접근 시 처벌을 받을 수 있습니다.
+                                        지정된 이용자만 접근 부탁드립니다.
+                                              @example.com
+
+  ####################################################################################################
+
+# 보안 강화 패키지 설정
+security_hardening::packages:
+  ubuntu:
+    - nfs-common
+    - net-tools
+    - dnsutils
+    - traceroute
+    - stress-ng
+  rocky:
+    - yum-utils
+    - dnsutils
+    - nc
+    - redhat-lsb-core
+    - net-tools
+    - nfs-utils
+    - vim
+
+security_hardening::limits:
+  nofile: 655350
+  nproc: 655350
+
+# SSH Configuration (file_line based)
+security_hardening::ssh::permit_root_login: 'no'
+security_hardening::ssh::password_authentication: 'yes'
+security_hardening::ssh::pubkey_authentication: 'yes'
+security_hardening::ssh::port: 22
+
+security_hardening::ssh_client::managed_users:
+  - ubuntu
+  - scv
+  - probe
+  - marine
+  - drone
+  - zealot
+security_hardening::ssh_client::config_content: |
+  Host *.internal.example.com
+    PreferredAuthentications=password,publickey
+    PubkeyAuthentication=yes
+
+  Host *.internal.example.com
+    PreferredAuthentications=password,publickey
