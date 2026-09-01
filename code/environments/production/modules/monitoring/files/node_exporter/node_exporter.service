@@ -1,0 +1,18 @@
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=-/etc/default/node_exporter
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter --web.listen-address=:39100 $NODE_EXPORTER_OPTS
+Restart=always
+RestartSec=5s
+StartLimitIntervalSec=60s
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target

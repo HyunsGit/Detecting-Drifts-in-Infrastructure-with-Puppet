@@ -1,0 +1,5 @@
+---
+# NTP Server node — node-ntp-01
+# This node is the NTP server running chronyd
+# Puppet must not manage NTP config on this node
+time::manage_ntp: false

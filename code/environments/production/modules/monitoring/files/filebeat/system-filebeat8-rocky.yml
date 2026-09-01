@@ -1,0 +1,27 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  backoff: 1s
+  max_backoff: 5s
+  paths:
+    - /var/log/messages
+  fields:
+    log_type: system-log
+    system: true
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+output.logstash:
+  hosts: ["ha-nlb-infra-log-es.kr2-nw.d6n.io:35040"]
+
+logging.level: info
+logging.to_stderr: false
+logging.to_syslog: false
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat-8.17
+  name: filebeat
+  keepfiles: 5
+  permissions: 0644

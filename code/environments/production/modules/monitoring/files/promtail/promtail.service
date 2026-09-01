@@ -1,0 +1,15 @@
+[Unit]
+Description=Promtail service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/promtail -config.file /etc/promtail/promtail-config.yaml
+Restart=on-failure
+RestartSec=20
+StandardOutput=append:/etc/promtail/logs/promtail.log
+StandardError=append:/etc/promtail/logs/promtail.log
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,4 @@
+---
+# NTP Configuration
+time::ntp::ubuntu_server: 'ntp.internal.example.com'
+time::ntp::rocky_server: 'ntp.internal.example.com'

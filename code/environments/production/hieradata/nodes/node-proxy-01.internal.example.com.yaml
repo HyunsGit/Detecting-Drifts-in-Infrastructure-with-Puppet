@@ -1,0 +1,7 @@
+---
+# No internet access node overrides
+monitoring::promtail::manage: false
+apt::update::frequency: 'never'
+security_hardening::packages::exclude:
+  - stress-ng
+security_hardening::pam::manage_pwquality: false
