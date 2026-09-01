@@ -1,0 +1,19 @@
+server:
+  http_listen_port: 39080
+  grpc_listen_port: 0
+
+positions:
+  filename: /etc/promtail/positions.yaml
+
+clients:
+  - url: <%= $loki_url %>
+
+scrape_configs:
+  - job_name: system
+    static_configs:
+    - targets:
+        - localhost
+      labels:
+        job: varlogs
+        hostname: <%= $node_hostname %>
+        __path__: /var/log/*log

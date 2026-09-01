@@ -1,0 +1,6 @@
+Host *.internal.example.com
+  PreferredAuthentications=password,publickey
+  PubkeyAuthentication=yes
+
+Host <%= @facts['networking']['domain'] %>
+  PreferredAuthentications=password,publickey
