@@ -1,7 +1,7 @@
 # Detecting Drifts in Infrastructure with Puppet
 
 > KakaoCloud 환경에서 Puppet을 사용해 인프라 상태를 지속적으로 수렴(enforce)하고,  
-> 실제 서버 상태와 선언된 코드 간의 **드리프트(Drift)를 자동 감지·복구**하는 구성 관리 프로젝트입니다.
+> 실제 서버 상태와 선언된 코드 간의 **드리프트(Drift)를 자동 감지·복구**하는 구성 관리를 목적으로 함.
 
 ---
 
@@ -15,7 +15,7 @@
 | **지원 OS** | Ubuntu, Rocky Linux |
 | **환경(Environment)** | `production`, `sandbox`, `pi`, `local` |
 
-Puppet의 **선언적 구성(Declarative Configuration)** 모델을 활용하여, 에이전트가 매 실행마다 서버 상태를 desired state와 비교합니다. 드리프트가 발생하면 Puppet이 자동으로 수렴(remediate)하고, PuppetDB에 변경 이력이 기록됩니다.
+Puppet의 **선언적 구성(Declarative Configuration)** 모델을 활용하여, 에이전트가 매 실행마다 서버 상태를 desired state와 비교합니다. 드리프트가 발생하면 Puppet이 자동으로 수렴(remediate)하고, PuppetDB에 변경 이력이 기록.
 
 ---
 
@@ -71,7 +71,7 @@ code/environments/production/
 
 ### `security_hardening` — 보안 강화 및 드리프트 감지
 
-서버 보안 설정의 핵심으로, 수동 변경이나 잘못된 설정이 가해지더라도 **매 실행마다 원하는 상태로 복원**합니다.
+서버 보안 설정의 핵심으로, 수동 변경이나 잘못된 설정이 가해지더라도 **매 실행마다 원하는 상태로 복원**.
 
 | 서브클래스 | 관리 대상 | 드리프트 감지 항목 |
 |---|---|---|
@@ -87,7 +87,7 @@ code/environments/production/
 | `packages` | apt/dnf 패키지 | 필수 패키지 `ensure => latest` |
 | `ulimits` | /etc/security/limits.conf | nofile/nproc 655350 |
 
-**Noop 모드 지원**: Hiera에서 `noop_mode: true` 설정 시 실제 변경 없이 드리프트만 리포트합니다.
+**Noop 모드 지원**: Hiera에서 `noop_mode: true` 설정 시 실제 변경 없이 드리프트만 리포트.
 
 ```puppet
 # site.pp
@@ -101,7 +101,7 @@ if $noop_mode {
 
 ### `monitoring` — 모니터링 에이전트 상태 관리
 
-모니터링 에이전트가 예기치 않게 중단되거나 설정이 변경되어도 자동으로 복구합니다.
+모니터링 에이전트가 예기치 않게 중단되거나 설정이 변경되어도 자동으로 복구.
 
 | 컴포넌트 | 버전 | 역할 |
 |---|---|---|
@@ -117,7 +117,7 @@ if $noop_mode {
 
 ### `networking` — 네트워크 설정 강제 수렴
 
-Ubuntu 노드에서 cloud-init에 의해 DNS 설정이 초기화되는 것을 방지합니다.
+Ubuntu 노드에서 cloud-init에 의해 DNS 설정이 초기화되는 것을 방지.
 
 - `/etc/netplan/50-cloud-init.yaml` 관리 (ERB 템플릿)
 - cloud-init 네트워크 설정 비활성화 (`99-disable-network-config.cfg`)
@@ -171,7 +171,7 @@ noop_mode: true
 | `pi` | 특정 프로젝트 격리 환경 |
 | `local` | 로컬 테스트 환경 |
 
-각 환경은 동일한 모듈 구조를 가지며, Hiera 데이터를 통해 환경별 값을 다르게 적용합니다.
+각 환경은 동일한 모듈 구조를 가지며, Hiera 데이터를 통해 환경별 값을 다르게 적용.
 
 ---
 
