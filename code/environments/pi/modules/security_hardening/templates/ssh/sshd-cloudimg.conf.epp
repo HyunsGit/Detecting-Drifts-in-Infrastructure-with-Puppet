@@ -1,0 +1,28 @@
+<% | Variant[Boolean,String] $permit_root_login, Variant[Boolean,String] $password_authentication, Integer $ssh_port, String $pubkey_authentication | -%>
+# This file is managed by Puppet for PI environment. DO NOT EDIT manually!
+# Template: security_hardening/ssh/sshd-cloudimg.conf.epp
+
+# Ubuntu/Rocky cloud-init SSH settings
+# These settings override the default sshd_config
+
+# Password authentication
+PasswordAuthentication <%= $password_authentication %>
+
+# Root login
+PermitRootLogin <%= $permit_root_login %>
+
+# SSH port
+Port <%= $ssh_port %>
+
+# Key-based authentication
+PubkeyAuthentication <%= $pubkey_authentication %>
+
+# X11 forwarding
+X11Forwarding yes
+
+# Subsystem
+Subsystem sftp  /usr/lib/openssh/sftp-server
+
+# Accept locale environment variables
+AcceptEnv LANG LC_*
+

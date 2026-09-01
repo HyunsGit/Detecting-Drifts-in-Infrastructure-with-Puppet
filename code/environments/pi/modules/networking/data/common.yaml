@@ -1,0 +1,1 @@
+networking::dns_update::primary_if: '%{facts.networking.primary_enp3s0}'
