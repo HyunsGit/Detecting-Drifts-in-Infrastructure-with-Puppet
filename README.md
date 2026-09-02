@@ -5,6 +5,21 @@
 
 ---
 
+## 핵심 성과
+
+| 항목 | Before | After | 비고 |
+|---|---|---|---|
+| 설정 드리프트 감지 | 수동 점검 (누락 가능) | **1시간 주기 자동 감지·복구** | PuppetDB 리포트 기반 |
+| 구성 상태 보장 | Ansible 원타임 적용 | **지속적 수렴 (Continuous Enforcement)** | 수동 변경 시 자동 복원 |
+| 관리 항목 | — | SSH·계정·PAM·sudoers·파일권한·NTP·DNS·모니터링 에이전트 등 | 커스텀 모듈 4개 |
+| Ansible + Puppet 역할 분담 | 단일 Ansible 의존 | **Hybrid 구성관리 아키텍처** | 2026년 전략 수립·적용 |
+
+- Ansible(초기 프로비저닝) + Puppet(지속 상태 관리) 역할 분담 전략 수립 및 VM 생성부터 Configuration Management까지 연결되는 Hybrid 아키텍처 설계
+- 수동 변경·설정 누락 등 드리프트 발생 시 다음 agent 실행(최대 1시간) 내 자동 복원
+- `noop_mode` 지원으로 실변경 없이 드리프트 현황만 리포트 가능
+
+---
+
 ## Overview
 
 | 항목 | 내용 |
