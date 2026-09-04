@@ -1,6 +1,27 @@
 # Detecting Drifts in Infrastructure with Puppet
 
-> KakaoCloud 환경에서 Puppet을 사용해 인프라 상태를 지속적으로 수렴(enforce)하고,  
+Table of Contents
+=================
+
+* [Detecting Drifts in Infrastructure with Puppet](#detecting-drifts-in-infrastructure-with-puppet)
+  * [핵심 성과](#핵심-성과)
+  * [Overview](#overview)
+  * [Architecture](#architecture)
+  * [Module Structure](#module-structure)
+  * [Modules](#modules)
+    * [security\_hardening — 보안 강화 및 드리프트 감지](#security_hardening--보안-강화-및-드리프트-감지)
+    * [monitoring — 모니터링 에이전트 상태 관리](#monitoring--모니터링-에이전트-상태-관리)
+    * [networking — 네트워크 설정 강제 수렴](#networking--네트워크-설정-강제-수렴)
+    * [time — 시간 동기화 설정](#time--시간-동기화-설정)
+  * [Hiera — 계층적 데이터 관리](#hiera--계층적-데이터-관리)
+  * [Environments](#environments)
+  * [Operations](#operations)
+    * [인증서 폐기 (노드 제거 시)](#인증서-폐기-노드-제거-시)
+    * [수동 에이전트 실행](#수동-에이전트-실행)
+    * [드리프트 리포트 조회 (PuppetDB)](#드리프트-리포트-조회-puppetdb)
+  * [Tech Stack](#tech-stack)
+
+> 클라우드 환경에서 Puppet을 사용해 인프라 상태를 지속적으로 수렴(enforce)하고,  
 > 실제 서버 상태와 선언된 코드 간의 **드리프트(Drift)를 자동 감지·복구**하는 구성 관리를 목적으로 함.
 
 ---
