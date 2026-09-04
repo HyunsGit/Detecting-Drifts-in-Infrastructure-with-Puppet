@@ -51,7 +51,7 @@ Table of Contents
 | **지원 OS** | Ubuntu, Rocky Linux |
 | **환경(Environment)** | `production`, `sandbox`, `pi`, `local` |
 
-Puppet의 **선언적 구성(Declarative Configuration)** 모델을 활용하여, 에이전트가 매 실행마다 서버 상태를 desired state와 비교합니다. 드리프트가 발생하면 Puppet이 자동으로 수렴(remediate)하고, PuppetDB에 변경 이력이 기록.
+Puppet의 **선언적 구성(Declarative Configuration)** 모델을 활용하여, 에이전트가 매 실행마다 서버 상태를 desired state와 비교. 드리프트가 발생하면 Puppet이 자동으로 수렴(remediate)하고, PuppetDB에 변경 이력이 기록.
 
 ---
 
